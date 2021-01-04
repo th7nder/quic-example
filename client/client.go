@@ -44,7 +44,7 @@ func stream(session quic.Session, wg *sync.WaitGroup) {
 
 // Client connects to addr, opens n streams and downloads all data it can receive from a stream
 func Client(addr string, streams int, multipath bool, game bool) error {
-	session, err := quic.DialAddr(addr, &tls.Config{InsecureSkipVerify: true}, &quic.Config{})
+	session, err := quic.DialAddr(addr, &tls.Config{InsecureSkipVerify: true, NextProtos: []string{"quic-echo-example"}}, &quic.Config{})
 	if err != nil {
 		return err
 	}
